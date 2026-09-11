@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Price List | ATLAN</title>
+<meta name="description" content="Indicative pricing across every brand and piece ATLAN can source." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="pricelist">
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="logo">ATLAN</a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-nav="home">Home</a></li>
+      <li><a href="catalog.html" data-nav="catalog">Collections</a></li>
+      <li><a href="pricelist.html" data-nav="pricelist">Price List</a></li>
+      <li><a href="about.html" data-nav="about">About</a></li>
+      <li><a href="contact.html" data-nav="contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+  </nav>
+</header>
+
+<main>
+  <section style="padding-bottom:0;">
+    <div class="container">
+      <p class="eyebrow">Full Catalog</p>
+      <h1 style="font-size:clamp(2rem,4vw,3rem);">Price List</h1>
+      <p style="max-width:560px;">Indicative starting prices across every brand we work with. Actual sourcing price depends on condition, availability, and box &amp; papers — confirmed once we locate your piece.</p>
+    </div>
+  </section>
+
+  <section style="border-bottom:none;">
+    <div class="container">
+      <div class="price-toolbar">
+        <input type="text" placeholder="Search model or reference…" data-price-search />
+        <select data-price-brand></select>
+        <select data-price-material></select>
+      </div>
+
+      <p class="result-count" data-price-count style="margin-bottom:12px;"></p>
+
+      <div class="price-table-wrap">
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th>Brand</th>
+              <th>Model</th>
+              <th>Reference</th>
+              <th>Material</th>
+              <th>Dial</th>
+              <th style="text-align:right;">Starting Price</th>
+            </tr>
+          </thead>
+          <tbody data-price-table-body></tbody>
+        </table>
+      </div>
+
+      <p class="price-note">Don't see the reference you want? <a href="contact.html" style="text-decoration:underline;">Send us a request</a> — this list is a sample of what we regularly source, not the limit of it.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <span class="logo" style="font-size:1.2rem;">ATLAN</span>
+        <p style="margin-top:16px;max-width:320px;">A sourcing service for people who know exactly what watch they want — or need help finding out.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul class="footer-links">
+          <li><a href="catalog.html">Collections</a></li>
+          <li><a href="pricelist.html">Price List</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in Touch</h4>
+        <ul class="footer-links">
+          <li><a data-site-email href="#"></a></li>
+          <li><a data-site-phone href="#"></a></li>
+          <li><a data-site-instagram href="#" target="_blank" rel="noopener"></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span data-site-year></span> ATLAN. All rights reserved.</span>
+      <span>Prices indicative — final pricing confirmed at sourcing.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

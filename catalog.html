@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Collections | ATLAN</title>
+<meta name="description" content="Browse ATLAN's sourced watch collections by brand, filtered by price, material, and dial colour." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="catalog">
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="logo">ATLAN</a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-nav="home">Home</a></li>
+      <li><a href="catalog.html" data-nav="catalog">Collections</a></li>
+      <li><a href="pricelist.html" data-nav="pricelist">Price List</a></li>
+      <li><a href="about.html" data-nav="about">About</a></li>
+      <li><a href="contact.html" data-nav="contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+  </nav>
+</header>
+
+<main>
+  <section class="catalog-hero" style="padding-bottom:0;">
+    <div class="container">
+      <p class="eyebrow">Collection</p>
+      <h1 data-brand-name style="font-size:clamp(2rem,4vw,3rem);">Brand</h1>
+      <p data-brand-blurb style="max-width:520px;"></p>
+      <div class="brand-nav" data-brand-nav></div>
+    </div>
+  </section>
+
+  <section style="border-bottom:none;">
+    <div class="container">
+      <form data-filter-form>
+        <div class="catalog-layout">
+          <aside class="filters">
+            <h4>Price</h4>
+            <div class="filter-group" data-filter-price></div>
+
+            <h4>Material</h4>
+            <div class="filter-group" data-filter-material></div>
+
+            <h4>Dial Colour</h4>
+            <div class="filter-group" data-filter-dial></div>
+
+            <button type="button" class="clear-filters" data-clear-filters>Clear all filters</button>
+          </aside>
+
+          <div>
+            <div class="catalog-toolbar">
+              <span class="result-count" data-result-count></span>
+              <select data-sort>
+                <option value="">Sort: Featured</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+              </select>
+            </div>
+            <div class="watch-grid" data-catalog-grid></div>
+            <div class="empty-state" data-empty-state hidden>
+              <p style="margin-bottom:16px;">No pieces match those filters right now.</p>
+              <a href="contact.html" class="btn">Request This Instead</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <span class="logo" style="font-size:1.2rem;">ATLAN</span>
+        <p style="margin-top:16px;max-width:320px;">A sourcing service for people who know exactly what watch they want — or need help finding out.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul class="footer-links">
+          <li><a href="catalog.html">Collections</a></li>
+          <li><a href="pricelist.html">Price List</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in Touch</h4>
+        <ul class="footer-links">
+          <li><a data-site-email href="#"></a></li>
+          <li><a data-site-phone href="#"></a></li>
+          <li><a data-site-instagram href="#" target="_blank" rel="noopener"></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span data-site-year></span> ATLAN. All rights reserved.</span>
+      <span>Prices indicative — final pricing confirmed at sourcing.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
