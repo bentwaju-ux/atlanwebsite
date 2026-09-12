@@ -1,17 +1,21 @@
 /* ============================================================
-   ATLAN — stylesheet. Strict black & white palette to match the
-   brand's Instagram identity (white text on black).
+   ATLAN — stylesheet. Warm charcoal base with an antique-gold
+   accent — evokes the gold/steel case tones of the watches
+   themselves rather than a flat black & white brand palette.
    ============================================================ */
 
 :root {
-  --black: #0a0a0a;
-  --near-black: #141414;
-  --charcoal: #1f1f1f;
-  --line: #2c2c2c;
-  --white: #f7f7f4;
+  --black: #0c0b09;
+  --near-black: #17150f;
+  --charcoal: #221f18;
+  --line: #322d20;
+  --white: #f4efe3;
   --pure-white: #ffffff;
-  --grey-400: #8c8c86;
-  --grey-600: #5a5a56;
+  --grey-400: #a89e88;
+  --grey-600: #6e6653;
+  --gold: #c9a24a;
+  --gold-light: #e3c479;
+  --gold-dark: #8a6d2c;
   --max-width: 1200px;
   --radius: 2px;
   --font-display: "Oswald", "Arial Narrow", Impact, sans-serif;
@@ -73,7 +77,7 @@ p {
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 0.72rem;
-  color: var(--grey-400);
+  color: var(--gold);
   margin-bottom: 0.75em;
 }
 
@@ -82,9 +86,9 @@ p {
   align-items: center;
   gap: 8px;
   padding: 14px 28px;
-  border: 1px solid var(--white);
+  border: 1px solid var(--gold);
   background: transparent;
-  color: var(--white);
+  color: var(--gold);
   font-family: var(--font-body);
   font-size: 0.85rem;
   letter-spacing: 0.08em;
@@ -94,16 +98,17 @@ p {
   border-radius: var(--radius);
 }
 .btn:hover {
-  background: var(--white);
+  background: var(--gold);
   color: var(--black);
 }
 .btn-solid {
-  background: var(--white);
+  background: var(--gold);
   color: var(--black);
+  border-color: var(--gold);
 }
 .btn-solid:hover {
-  background: var(--grey-400);
-  border-color: var(--grey-400);
+  background: var(--gold-light);
+  border-color: var(--gold-light);
 }
 .btn-block {
   width: 100%;
@@ -116,7 +121,7 @@ p {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(10, 10, 10, 0.92);
+  background: rgba(12, 11, 9, 0.92);
   backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--line);
 }
@@ -159,7 +164,7 @@ p {
 .nav-links a:hover,
 .nav-links a.is-active {
   color: var(--white);
-  border-color: var(--white);
+  border-color: var(--gold);
 }
 
 .nav-toggle {
@@ -183,7 +188,7 @@ p {
 }
 
 .hero__eyebrow {
-  color: var(--grey-400);
+  color: var(--gold);
   text-transform: uppercase;
   letter-spacing: 0.25em;
   font-size: 0.75rem;
@@ -274,7 +279,7 @@ section:last-of-type {
   font-size: 0.78rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--white);
+  color: var(--gold);
   margin-top: auto;
 }
 
@@ -334,7 +339,7 @@ section:last-of-type {
   margin: auto 0 0;
   font-family: var(--font-display);
   font-size: 1.15rem;
-  color: var(--white);
+  color: var(--gold);
 }
 
 /* ---------------- Process / about steps ---------------- */
@@ -352,7 +357,7 @@ section:last-of-type {
 .step__num {
   font-family: var(--font-display);
   font-size: 2rem;
-  color: var(--grey-600);
+  color: var(--gold);
   margin-bottom: 16px;
 }
 .step h3 {
@@ -383,13 +388,13 @@ section:last-of-type {
   border-radius: var(--radius);
 }
 .chip:hover {
-  color: var(--white);
-  border-color: var(--white);
+  color: var(--gold);
+  border-color: var(--gold);
 }
 .chip.is-active {
-  background: var(--white);
+  background: var(--gold);
   color: var(--black);
-  border-color: var(--white);
+  border-color: var(--gold);
 }
 
 .catalog-layout {
@@ -436,7 +441,7 @@ section:last-of-type {
   color: var(--white);
 }
 .filter-option input {
-  accent-color: var(--white);
+  accent-color: var(--gold);
 }
 .filter-option .swatch {
   width: 14px;
@@ -528,7 +533,7 @@ select {
 .watch-detail__price {
   font-family: var(--font-display);
   font-size: 1.8rem;
-  color: var(--white);
+  color: var(--gold);
   margin-bottom: 24px;
 }
 
@@ -614,7 +619,7 @@ table.price-table {
 .price-table td.num {
   text-align: right;
   font-family: var(--font-display);
-  color: var(--white);
+  color: var(--gold);
 }
 
 .price-table tbody tr:hover {
@@ -677,7 +682,7 @@ table.price-table {
 .trust-grid .stat-num {
   font-family: var(--font-display);
   font-size: 2.2rem;
-  color: var(--white);
+  color: var(--gold);
 }
 .trust-grid .stat-label {
   font-size: 0.8rem;
@@ -761,7 +766,7 @@ table.price-table {
 .field input:focus,
 .field textarea:focus,
 .field select:focus {
-  outline: 1px solid var(--white);
+  outline: 1px solid var(--gold);
 }
 
 .form-success {
