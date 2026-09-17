@@ -9,10 +9,10 @@ const SITE_CONFIG = {
   subline:
     "From Rolex to Patek Philippe, Audemars Piguet to Richard Mille — if you can picture it on your wrist, we can source it for you.",
   email: "hello@atlan.example",
-  phone: "+1 (000) 000-0000",
-  whatsappNumber: "10000000000", // digits only, include country code, no + or spaces
-  instagramHandle: "@atlan",
-  instagramUrl: "https://instagram.com/atlan",
+  phone: "0703 159 5003",
+  whatsappNumber: "2347031595003", // digits only, include country code, no + or spaces
+  instagramHandle: "@atlan_luxe",
+  instagramUrl: "https://instagram.com/atlan_luxe",
   location: "By appointment",
 };
 

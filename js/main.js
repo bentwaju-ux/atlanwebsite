@@ -14,7 +14,41 @@ document.addEventListener("DOMContentLoaded", () => {
   if (page === "watch") initWatchDetail();
   if (page === "pricelist") initPriceList();
   if (page === "contact") initContact();
+
+  initScrollReveal();
 });
+
+/* ---------------- Scroll reveal ---------------- */
+
+function initScrollReveal() {
+  const targets = document.querySelectorAll("main > section");
+  if (!targets.length) return;
+  targets.forEach((el) => el.classList.add("reveal"));
+
+  if (!("IntersectionObserver" in window)) {
+    targets.forEach((el) => el.classList.add("is-visible"));
+    return;
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          io.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0, rootMargin: "0px 0px -40px 0px" }
+  );
+  targets.forEach((el) => io.observe(el));
+
+  // Safety net — never leave a section permanently invisible if the
+  // observer is slow, misfires, or a screenshot/crawler skips scrolling.
+  window.setTimeout(() => {
+    targets.forEach((el) => el.classList.add("is-visible"));
+  }, 2000);
+}
 
 /* ---------------- Navigation ---------------- */
 
@@ -284,6 +318,15 @@ function initCatalog() {
   const empty = document.querySelector("[data-empty-state]");
   const form = document.querySelector("[data-filter-form]");
 
+  const dropdownLabels = { price: "Price", material: "Material", dial: "Dial Colour" };
+  function setDropdownLabel(name, activeCount) {
+    const dd = document.querySelector(`[data-dropdown="${name}"]`);
+    if (!dd) return;
+    const labelEl = dd.querySelector("[data-label-text]");
+    labelEl.textContent = activeCount ? `${dropdownLabels[name]} (${activeCount})` : dropdownLabels[name];
+    dd.classList.toggle("has-selection", activeCount > 0);
+  }
+
   function render() {
     const checked = (name) =>
       Array.from(form.querySelectorAll(`input[name="${name}"]:checked`)).map((i) => i.value);
@@ -291,6 +334,10 @@ function initCatalog() {
     const dials = checked("dial");
     const priceKeys = checked("price");
     const priceRanges = priceKeys.map((k) => PRICE_BUCKETS.find((p) => p.value === k));
+
+    setDropdownLabel("price", priceKeys.length);
+    setDropdownLabel("material", materials.length);
+    setDropdownLabel("dial", dials.length);
 
     let results = WATCHES.filter((w) => w.brand === brand.slug);
     if (materials.length) results = results.filter((w) => materials.includes(w.material));
@@ -312,6 +359,20 @@ function initCatalog() {
   document.querySelector("[data-clear-filters]")?.addEventListener("click", () => {
     form.reset();
     render();
+  });
+
+  const dropdowns = document.querySelectorAll("[data-dropdown]");
+  dropdowns.forEach((dd) => {
+    const btn = dd.querySelector("[data-dropdown-btn]");
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = dd.classList.contains("is-open");
+      dropdowns.forEach((other) => other.classList.remove("is-open"));
+      if (!isOpen) dd.classList.add("is-open");
+    });
+  });
+  document.addEventListener("click", () => {
+    dropdowns.forEach((dd) => dd.classList.remove("is-open"));
   });
 
   render();
@@ -404,7 +465,6 @@ function initPriceList() {
       <tr>
         <td>${getBrand(w.brand).name}</td>
         <td><a href="watch.html?id=${encodeURIComponent(w.id)}">${w.model}</a></td>
-        <td>${w.reference}</td>
         <td>${getMaterialLabel(w.material)}</td>
         <td>${getDialLabel(w.dialColor)}</td>
         <td class="num">${formatPrice(w.price)}</td>

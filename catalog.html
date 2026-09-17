@@ -7,7 +7,7 @@
 <meta name="description" content="Browse ATLAN's sourced watch collections by brand, filtered by price, material, and dial colour." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Anton&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body data-page="catalog">
@@ -40,35 +40,40 @@
   <section style="border-bottom:none;">
     <div class="container">
       <form data-filter-form>
-        <div class="catalog-layout">
-          <aside class="filters">
-            <h4>Price</h4>
-            <div class="filter-group" data-filter-price></div>
-
-            <h4>Material</h4>
-            <div class="filter-group" data-filter-material></div>
-
-            <h4>Dial Colour</h4>
-            <div class="filter-group" data-filter-dial></div>
-
-            <button type="button" class="clear-filters" data-clear-filters>Clear all filters</button>
-          </aside>
-
-          <div>
-            <div class="catalog-toolbar">
-              <span class="result-count" data-result-count></span>
-              <select data-sort>
-                <option value="">Sort: Featured</option>
-                <option value="price-asc">Price: Low to High</option>
-                <option value="price-desc">Price: High to Low</option>
-              </select>
-            </div>
-            <div class="watch-grid" data-catalog-grid></div>
-            <div class="empty-state" data-empty-state hidden>
-              <p style="margin-bottom:16px;">No pieces match those filters right now.</p>
-              <a href="contact.html" class="btn">Request This Instead</a>
-            </div>
+        <div class="filter-bar">
+          <div class="filter-dropdown" data-dropdown="price">
+            <button type="button" class="filter-dropdown__btn" data-dropdown-btn>
+              <span data-label-text>Price</span><span class="caret">&#9662;</span>
+            </button>
+            <div class="filter-dropdown__panel" data-filter-price></div>
           </div>
+          <div class="filter-dropdown" data-dropdown="material">
+            <button type="button" class="filter-dropdown__btn" data-dropdown-btn>
+              <span data-label-text>Material</span><span class="caret">&#9662;</span>
+            </button>
+            <div class="filter-dropdown__panel" data-filter-material></div>
+          </div>
+          <div class="filter-dropdown" data-dropdown="dial">
+            <button type="button" class="filter-dropdown__btn" data-dropdown-btn>
+              <span data-label-text>Dial Colour</span><span class="caret">&#9662;</span>
+            </button>
+            <div class="filter-dropdown__panel" data-filter-dial></div>
+          </div>
+          <button type="button" class="clear-filters" data-clear-filters>Clear all</button>
+        </div>
+
+        <div class="catalog-toolbar">
+          <span class="result-count" data-result-count></span>
+          <select data-sort>
+            <option value="">Sort: Featured</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+          </select>
+        </div>
+        <div class="watch-grid" data-catalog-grid></div>
+        <div class="empty-state" data-empty-state hidden>
+          <p style="margin-bottom:16px;">No pieces match those filters right now.</p>
+          <a href="contact.html" class="btn">Request This Instead</a>
         </div>
       </form>
     </div>
