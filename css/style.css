@@ -182,9 +182,29 @@ p {
 /* ---------------- Hero ---------------- */
 
 .hero {
+  position: relative;
   padding: 120px 24px 90px;
   text-align: center;
   border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(11, 93, 63, 0.4), transparent 42%),
+    radial-gradient(circle at 85% 18%, rgba(28, 63, 102, 0.4), transparent 42%),
+    radial-gradient(circle at 78% 82%, rgba(110, 42, 58, 0.35), transparent 42%),
+    radial-gradient(circle at 20% 85%, rgba(194, 91, 31, 0.3), transparent 42%),
+    radial-gradient(circle at 50% 50%, rgba(31, 122, 140, 0.25), transparent 48%);
+  filter: blur(70px);
+  z-index: 0;
+  pointer-events: none;
+}
+.hero .container {
+  position: relative;
+  z-index: 1;
 }
 
 .hero__eyebrow {
@@ -255,6 +275,7 @@ section:last-of-type {
 
 .brand-tile {
   background: var(--black);
+  border-top: 3px solid var(--accent, var(--gold));
   padding: 48px 32px;
   display: flex;
   flex-direction: column;
@@ -263,7 +284,7 @@ section:last-of-type {
   transition: background 0.25s ease;
 }
 .brand-tile:hover {
-  background: var(--near-black);
+  background: color-mix(in srgb, var(--accent, var(--gold)) 14%, var(--near-black));
 }
 .brand-tile__name {
   font-family: var(--font-display);
@@ -294,9 +315,15 @@ section:last-of-type {
 .watch-card {
   background: var(--near-black);
   border: 1px solid var(--line);
+  border-top: 4px solid var(--accent, var(--gold));
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.watch-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px -8px color-mix(in srgb, var(--accent, var(--gold)) 45%, transparent);
 }
 
 .watch-card__media {
@@ -388,13 +415,21 @@ section:last-of-type {
   border-radius: var(--radius);
 }
 .chip:hover {
-  color: var(--gold);
-  border-color: var(--gold);
+  color: var(--accent, var(--gold));
+  border-color: var(--accent, var(--gold));
 }
 .chip.is-active {
+  background: var(--accent, var(--gold));
+  color: var(--white);
+  border-color: var(--accent, var(--gold));
+}
+
+.brand-accent-bar {
+  display: block;
+  width: 48px;
+  height: 4px;
   background: var(--gold);
-  color: var(--black);
-  border-color: var(--gold);
+  margin-bottom: 18px;
 }
 
 .catalog-layout {

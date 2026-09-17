@@ -182,8 +182,9 @@ function escapeAttr(str) {
 
 function watchCardHTML(watch) {
   const brand = getBrand(watch.brand);
+  const accent = brand?.color || "var(--gold)";
   return `
-  <article class="watch-card">
+  <article class="watch-card" style="--accent:${accent}">
     <a href="watch.html?id=${encodeURIComponent(watch.id)}" class="watch-card__media">
       ${generateWatchSVG(watch)}
     </a>
@@ -203,10 +204,10 @@ function initHome() {
   if (grid) {
     grid.innerHTML = BRANDS.map(
       (b) => `
-      <a class="brand-tile" href="catalog.html?brand=${b.slug}">
+      <a class="brand-tile" href="catalog.html?brand=${b.slug}" style="--accent:${b.color}">
         <span class="brand-tile__name">${b.name}</span>
         <span class="brand-tile__blurb">${b.blurb}</span>
-        <span class="brand-tile__cta">Shop ${b.name} &rarr;</span>
+        <span class="brand-tile__cta" style="color:${b.color}">Shop ${b.name} &rarr;</span>
       </a>`
     ).join("");
   }
@@ -234,12 +235,13 @@ function initCatalog() {
 
   document.querySelectorAll("[data-brand-name]").forEach((el) => (el.textContent = brand.name));
   document.querySelectorAll("[data-brand-blurb]").forEach((el) => (el.textContent = brand.blurb));
+  document.querySelectorAll("[data-brand-accent]").forEach((el) => (el.style.background = brand.color));
 
   const brandNav = document.querySelector("[data-brand-nav]");
   if (brandNav) {
     brandNav.innerHTML = BRANDS.map(
       (b) =>
-        `<a href="catalog.html?brand=${b.slug}" class="chip${b.slug === brand.slug ? " is-active" : ""}">${b.name}</a>`
+        `<a href="catalog.html?brand=${b.slug}" class="chip${b.slug === brand.slug ? " is-active" : ""}" style="--accent:${b.color}">${b.name}</a>`
     ).join("");
   }
 
@@ -329,8 +331,11 @@ function initWatchDetail() {
 
   document.title = `${watch.model} — ${brand.name} | ATLAN`;
   wrap.querySelector("[data-media]").innerHTML = generateWatchSVG(watch, 480);
-  wrap.querySelector("[data-brand]").textContent = brand.name;
-  wrap.querySelector("[data-brand]").href = `catalog.html?brand=${brand.slug}`;
+  wrap.querySelector("[data-media]").style.borderTop = `4px solid ${brand.color}`;
+  const brandLink = wrap.querySelector("[data-brand]");
+  brandLink.textContent = brand.name;
+  brandLink.href = `catalog.html?brand=${brand.slug}`;
+  brandLink.style.color = brand.color;
   wrap.querySelector("[data-model]").textContent = watch.model;
   wrap.querySelector("[data-reference]").textContent = watch.reference;
   wrap.querySelector("[data-price]").textContent = formatPrice(watch.price);

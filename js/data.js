@@ -16,37 +16,46 @@ const SITE_CONFIG = {
   location: "By appointment",
 };
 
-/* Brand categories — flat, no sub-categories per brand */
+/* Brand categories — flat, no sub-categories per brand.
+   `color` is each brand's signature accent (Rolex green box, Cartier
+   red box, Omega blue, etc.) — used to give each collection its own
+   identity across brand tiles, chips, and product cards. */
 const BRANDS = [
   {
     slug: "rolex",
     name: "Rolex",
     blurb: "The benchmark of modern watchmaking.",
+    color: "#0b5d3f",
   },
   {
     slug: "patek-philippe",
     name: "Patek Philippe",
     blurb: "Generational pieces, made to be handed down.",
+    color: "#1c3f66",
   },
   {
     slug: "audemars-piguet",
     name: "Audemars Piguet",
     blurb: "Bold engineering since 1875.",
+    color: "#6e2a3a",
   },
   {
     slug: "omega",
     name: "Omega",
     blurb: "Precision proven on the moon and in the depths.",
+    color: "#1f7a8c",
   },
   {
     slug: "cartier",
     name: "Cartier",
     blurb: "Where horology meets jewellery.",
+    color: "#9c1c1c",
   },
   {
     slug: "richard-mille",
     name: "Richard Mille",
     blurb: "Motorsport engineering for the wrist.",
+    color: "#c25b1f",
   },
 ];
 
