@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <rect width="600" height="600" fill="#ffffff"/>
+  <rect x="16" y="16" width="568" height="568" fill="none" stroke="#d8d8d0" stroke-width="2" stroke-dasharray="10 8"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle" fill="#8a8a82">
+    <circle cx="300" cy="230" r="46" fill="none" stroke="#c7c7bd" stroke-width="3"/>
+    <path d="M300 200 L300 230 L322 244" fill="none" stroke="#c7c7bd" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="300" y="330" font-size="15" letter-spacing="3" fill="#a8a89e">ROLEX</text>
+    <text x="300" y="362" font-size="24" font-weight="bold" fill="#4a4a42">Cosmograph Daytona</text>
+    <text x="300" y="392" font-size="14" fill="#9a9a90">Ref. 126508</text>
+    <text x="300" y="440" font-size="13" fill="#b5b5aa">Replace this file with your product photo</text>
+    <text x="300" y="462" font-size="12" fill="#c5c5ba">assets/watches/rolex-daytona-yellowgold-black.jpg</text>
+  </g>
+</svg>

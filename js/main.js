@@ -227,13 +227,22 @@ function escapeAttr(str) {
 
 /* ---------------- Watch card (shared by home + catalog) ---------------- */
 
+/* Renders a real product photo when `watch.image` is set in data.js,
+   otherwise falls back to the generated placeholder illustration. */
+function watchMediaHTML(watch, size) {
+  if (watch.image) {
+    return `<img src="${watch.image}" alt="${escapeAttr(watch.brand + " " + watch.model)}" loading="lazy" />`;
+  }
+  return generateWatchSVG(watch, size);
+}
+
 function watchCardHTML(watch) {
   const brand = getBrand(watch.brand);
   const accent = brand?.color || "var(--gold)";
   return `
   <article class="watch-card" style="--accent:${accent}">
     <a href="watch.html?id=${encodeURIComponent(watch.id)}" class="watch-card__media">
-      ${generateWatchSVG(watch)}
+      ${watchMediaHTML(watch)}
     </a>
     <div class="watch-card__body">
       <p class="watch-card__brand">${brand ? brand.name : watch.brand}</p>
@@ -364,7 +373,7 @@ function initWatchDetail() {
   const brand = getBrand(watch.brand);
 
   document.title = `${watch.model} — ${brand.name} | ATLAN`;
-  wrap.querySelector("[data-media]").innerHTML = generateWatchSVG(watch, 480);
+  wrap.querySelector("[data-media]").innerHTML = watchMediaHTML(watch, 480);
   wrap.querySelector("[data-media]").style.borderTop = `4px solid ${brand.color}`;
   const brandLink = wrap.querySelector("[data-brand]");
   brandLink.textContent = brand.name;

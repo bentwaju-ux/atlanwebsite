@@ -357,6 +357,12 @@ section:last-of-type {
   display: block;
   padding: 16px;
 }
+.watch-card__media img,
+.watch-detail__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
 .watch-card__body {
   padding: 20px;
