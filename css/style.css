@@ -455,23 +455,29 @@ section:last-of-type {
   display: flex;
   align-items: center;
   gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 32px;
+  flex-wrap: nowrap;
+  margin-bottom: 12px;
 }
 .filter-bar select {
-  min-width: 160px;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 220px;
+  padding: 10px 26px 10px 10px;
+  background-position: right 8px center;
+  background-size: 11px;
+  font-size: 0.8rem;
 }
 
 .clear-filters {
-  flex-shrink: 0;
-  white-space: nowrap;
+  display: block;
+  margin-bottom: 20px;
   background: none;
   border: none;
   color: var(--grey-400);
   text-decoration: underline;
   font-size: 0.82rem;
   cursor: pointer;
-  padding: 12px 4px;
+  padding: 4px;
 }
 .clear-filters:hover {
   color: var(--white);
@@ -839,6 +845,16 @@ table.price-table {
   color: var(--white);
 }
 
+.footer-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-cta .btn {
+  padding: 12px 18px;
+  font-size: 0.76rem;
+}
+
 .footer-bottom {
   border-top: 1px solid var(--line);
   padding-top: 24px;
@@ -912,6 +928,9 @@ table.price-table {
 @media (max-width: 640px) {
   .nav-toggle {
     display: flex;
+  }
+  .filter-bar {
+    gap: 6px;
   }
   .nav-links {
     position: absolute;

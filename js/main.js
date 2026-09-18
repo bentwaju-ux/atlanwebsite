@@ -101,6 +101,9 @@ function initFooterInfo() {
     el.href = `https://wa.me/${SITE_CONFIG.whatsappNumber}`;
     if (!el.textContent.trim()) el.textContent = SITE_CONFIG.phone;
   });
+  document.querySelectorAll("[data-instagram-link]").forEach((el) => {
+    el.href = SITE_CONFIG.instagramUrl;
+  });
   document.querySelectorAll("[data-site-year]").forEach((el) => {
     el.textContent = new Date().getFullYear();
   });
@@ -294,21 +297,21 @@ function initCatalog() {
   const materialFilter = document.querySelector("[data-filter-material]");
   if (materialFilter) {
     materialFilter.innerHTML =
-      `<option value="">All Materials</option>` +
+      `<option value="">Materials</option>` +
       MATERIALS.map((m) => `<option value="${m.value}">${m.label}</option>`).join("");
   }
 
   const dialFilter = document.querySelector("[data-filter-dial]");
   if (dialFilter) {
     dialFilter.innerHTML =
-      `<option value="">All Dial Colours</option>` +
+      `<option value="">Dial Colours</option>` +
       DIAL_COLORS.map((d) => `<option value="${d.value}">${d.label}</option>`).join("");
   }
 
   const priceFilter = document.querySelector("[data-filter-price]");
   if (priceFilter) {
     priceFilter.innerHTML =
-      `<option value="">All Prices</option>` +
+      `<option value="">Prices</option>` +
       PRICE_BUCKETS.map((p) => `<option value="${p.value}">${p.label}</option>`).join("");
   }
 
