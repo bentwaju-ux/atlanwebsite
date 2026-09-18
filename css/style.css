@@ -448,7 +448,7 @@ section:last-of-type {
   margin-top: 20px;
   min-width: 220px;
   font-size: 0.95rem;
-  padding: 12px 16px;
+  padding: 12px 40px 12px 16px;
 }
 
 .filter-bar {
@@ -492,13 +492,21 @@ section:last-of-type {
 }
 
 select {
-  background: var(--near-black);
+  background-color: var(--near-black);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 8l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 13px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   color: var(--white);
-  border: 1px solid var(--line);
-  padding: 10px 14px;
+  border: 1px solid var(--white);
+  padding: 10px 38px 10px 14px;
   font-family: var(--font-body);
   font-size: 0.85rem;
   border-radius: var(--radius);
+  cursor: pointer;
 }
 
 .empty-state {
@@ -774,6 +782,9 @@ table.price-table {
   font-size: 0.95rem;
   border-radius: var(--radius);
   resize: vertical;
+}
+.field select {
+  border-color: var(--white);
 }
 .field input:focus,
 .field textarea:focus,
