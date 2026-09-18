@@ -541,7 +541,7 @@ select {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 64px;
-  padding: 64px 0;
+  padding: 64px 0 32px;
   align-items: start;
 }
 
@@ -944,6 +944,10 @@ table.price-table {
   }
   .filter-bar {
     gap: 6px;
+  }
+  .specs {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
   .nav-links {
     position: absolute;
