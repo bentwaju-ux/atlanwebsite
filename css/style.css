@@ -330,6 +330,13 @@ section:last-of-type {
   gap: 28px;
 }
 
+@media (max-width: 700px) {
+  .watch-grid[data-catalog-grid] {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
 .watch-card {
   background: var(--near-black);
   border: 1px solid var(--line);
