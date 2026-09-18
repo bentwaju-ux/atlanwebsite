@@ -90,6 +90,7 @@ function initFooterInfo() {
   });
   document.querySelectorAll("[data-whatsapp-link]").forEach((el) => {
     el.href = `https://wa.me/${SITE_CONFIG.whatsappNumber}`;
+    if (!el.textContent.trim()) el.textContent = SITE_CONFIG.phone;
   });
   document.querySelectorAll("[data-site-year]").forEach((el) => {
     el.textContent = new Date().getFullYear();
