@@ -33,7 +33,7 @@
       <span class="brand-accent-bar" data-brand-accent></span>
       <h1 data-brand-name style="font-size:clamp(2rem,4vw,3rem);">Brand</h1>
       <p data-brand-blurb style="max-width:520px;"></p>
-      <div class="brand-nav" data-brand-nav></div>
+      <select data-brand-select class="brand-select" aria-label="Choose a brand"></select>
     </div>
   </section>
 
@@ -41,24 +41,9 @@
     <div class="container">
       <form data-filter-form>
         <div class="filter-bar">
-          <div class="filter-dropdown" data-dropdown="price">
-            <button type="button" class="filter-dropdown__btn" data-dropdown-btn>
-              <span data-label-text>Price</span><span class="caret">&#9662;</span>
-            </button>
-            <div class="filter-dropdown__panel" data-filter-price></div>
-          </div>
-          <div class="filter-dropdown" data-dropdown="material">
-            <button type="button" class="filter-dropdown__btn" data-dropdown-btn>
-              <span data-label-text>Material</span><span class="caret">&#9662;</span>
-            </button>
-            <div class="filter-dropdown__panel" data-filter-material></div>
-          </div>
-          <div class="filter-dropdown" data-dropdown="dial">
-            <button type="button" class="filter-dropdown__btn" data-dropdown-btn>
-              <span data-label-text>Dial Colour</span><span class="caret">&#9662;</span>
-            </button>
-            <div class="filter-dropdown__panel" data-filter-dial></div>
-          </div>
+          <select data-filter-price aria-label="Filter by price"></select>
+          <select data-filter-material aria-label="Filter by material"></select>
+          <select data-filter-dial aria-label="Filter by dial colour"></select>
           <button type="button" class="clear-filters" data-clear-filters>Clear all</button>
         </div>
 

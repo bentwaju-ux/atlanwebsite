@@ -281,46 +281,35 @@ function initCatalog() {
   document.querySelectorAll("[data-brand-blurb]").forEach((el) => (el.textContent = brand.blurb));
   document.querySelectorAll("[data-brand-accent]").forEach((el) => (el.style.background = brand.color));
 
-  const brandNav = document.querySelector("[data-brand-nav]");
-  if (brandNav) {
-    brandNav.innerHTML = BRANDS.map(
-      (b) =>
-        `<a href="catalog.html?brand=${b.slug}" class="chip${b.slug === brand.slug ? " is-active" : ""}" style="--accent:${b.color}">${b.name}</a>`
+  const brandSelect = document.querySelector("[data-brand-select]");
+  if (brandSelect) {
+    brandSelect.innerHTML = BRANDS.map(
+      (b) => `<option value="${b.slug}"${b.slug === brand.slug ? " selected" : ""}>${b.name}</option>`
     ).join("");
+    brandSelect.addEventListener("change", () => {
+      location.href = `catalog.html?brand=${brandSelect.value}`;
+    });
   }
 
   const materialFilter = document.querySelector("[data-filter-material]");
   if (materialFilter) {
-    materialFilter.innerHTML = MATERIALS.map(
-      (m) => `
-      <label class="filter-option">
-        <input type="checkbox" name="material" value="${m.value}" />
-        <span>${m.label}</span>
-      </label>`
-    ).join("");
+    materialFilter.innerHTML =
+      `<option value="">All Materials</option>` +
+      MATERIALS.map((m) => `<option value="${m.value}">${m.label}</option>`).join("");
   }
 
   const dialFilter = document.querySelector("[data-filter-dial]");
   if (dialFilter) {
-    dialFilter.innerHTML = DIAL_COLORS.map(
-      (d) => `
-      <label class="filter-option">
-        <input type="checkbox" name="dial" value="${d.value}" />
-        <span class="swatch" style="background:${d.swatch}"></span>
-        <span>${d.label}</span>
-      </label>`
-    ).join("");
+    dialFilter.innerHTML =
+      `<option value="">All Dial Colours</option>` +
+      DIAL_COLORS.map((d) => `<option value="${d.value}">${d.label}</option>`).join("");
   }
 
   const priceFilter = document.querySelector("[data-filter-price]");
   if (priceFilter) {
-    priceFilter.innerHTML = PRICE_BUCKETS.map(
-      (p) => `
-      <label class="filter-option">
-        <input type="checkbox" name="price" value="${p.value}" />
-        <span>${p.label}</span>
-      </label>`
-    ).join("");
+    priceFilter.innerHTML =
+      `<option value="">All Prices</option>` +
+      PRICE_BUCKETS.map((p) => `<option value="${p.value}">${p.label}</option>`).join("");
   }
 
   const grid = document.querySelector("[data-catalog-grid]");
@@ -328,32 +317,16 @@ function initCatalog() {
   const empty = document.querySelector("[data-empty-state]");
   const form = document.querySelector("[data-filter-form]");
 
-  const dropdownLabels = { price: "Price", material: "Material", dial: "Dial Colour" };
-  function setDropdownLabel(name, activeCount) {
-    const dd = document.querySelector(`[data-dropdown="${name}"]`);
-    if (!dd) return;
-    const labelEl = dd.querySelector("[data-label-text]");
-    labelEl.textContent = activeCount ? `${dropdownLabels[name]} (${activeCount})` : dropdownLabels[name];
-    dd.classList.toggle("has-selection", activeCount > 0);
-  }
-
   function render() {
-    const checked = (name) =>
-      Array.from(form.querySelectorAll(`input[name="${name}"]:checked`)).map((i) => i.value);
-    const materials = checked("material");
-    const dials = checked("dial");
-    const priceKeys = checked("price");
-    const priceRanges = priceKeys.map((k) => PRICE_BUCKETS.find((p) => p.value === k));
-
-    setDropdownLabel("price", priceKeys.length);
-    setDropdownLabel("material", materials.length);
-    setDropdownLabel("dial", dials.length);
+    const materialVal = materialFilter?.value || "";
+    const dialVal = dialFilter?.value || "";
+    const priceVal = priceFilter?.value || "";
+    const priceRange = priceVal ? PRICE_BUCKETS.find((p) => p.value === priceVal) : null;
 
     let results = WATCHES.filter((w) => w.brand === brand.slug);
-    if (materials.length) results = results.filter((w) => materials.includes(w.material));
-    if (dials.length) results = results.filter((w) => dials.includes(w.dialColor));
-    if (priceRanges.length)
-      results = results.filter((w) => priceRanges.some((r) => w.price >= r.min && w.price < r.max));
+    if (materialVal) results = results.filter((w) => w.material === materialVal);
+    if (dialVal) results = results.filter((w) => w.dialColor === dialVal);
+    if (priceRange) results = results.filter((w) => w.price >= priceRange.min && w.price < priceRange.max);
 
     const sortValue = document.querySelector("[data-sort]")?.value;
     if (sortValue === "price-asc") results.sort((a, b) => a.price - b.price);
@@ -365,50 +338,12 @@ function initCatalog() {
   }
 
   form.addEventListener("change", render);
-  document.querySelector("[data-sort]")?.addEventListener("change", render);
   document.querySelector("[data-clear-filters]")?.addEventListener("click", () => {
-    form.reset();
+    [priceFilter, materialFilter, dialFilter].forEach((el) => {
+      if (el) el.value = "";
+    });
     render();
   });
-
-  const dropdowns = document.querySelectorAll("[data-dropdown]");
-
-  function positionPanel(dd) {
-    const btn = dd.querySelector("[data-dropdown-btn]");
-    const panel = dd.querySelector(".filter-dropdown__panel");
-    const rect = btn.getBoundingClientRect();
-    const left = Math.min(rect.left, window.innerWidth - panel.offsetWidth - 16);
-    panel.style.top = `${rect.bottom + 8}px`;
-    panel.style.left = `${Math.max(16, left)}px`;
-  }
-
-  function closeAllDropdowns() {
-    dropdowns.forEach((dd) => dd.classList.remove("is-open"));
-  }
-
-  dropdowns.forEach((dd) => {
-    const btn = dd.querySelector("[data-dropdown-btn]");
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const isOpen = dd.classList.contains("is-open");
-      closeAllDropdowns();
-      if (!isOpen) {
-        dd.classList.add("is-open");
-        positionPanel(dd);
-      }
-    });
-  });
-  // Clicking inside an open panel (e.g. a checkbox) must not close it —
-  // only a click truly outside every dropdown should.
-  document.addEventListener("click", (e) => {
-    if (e.target.closest("[data-dropdown]")) return;
-    closeAllDropdowns();
-  });
-  // Panels are position:fixed relative to their button; scrolling or
-  // resizing the viewport would leave them stranded, so just close them.
-  window.addEventListener("scroll", closeAllDropdowns, { passive: true });
-  window.addEventListener("resize", closeAllDropdowns);
-  document.querySelector(".filter-bar")?.addEventListener("scroll", closeAllDropdowns, { passive: true });
 
   render();
 }
