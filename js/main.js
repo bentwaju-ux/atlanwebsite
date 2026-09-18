@@ -25,8 +25,17 @@ function initScrollReveal() {
   if (!targets.length) return;
   targets.forEach((el) => el.classList.add("reveal"));
 
+  function reveal(el) {
+    el.classList.add("is-visible");
+    // The entrance transition animates `transform`, which makes this
+    // element a CSS containing block for any position:fixed descendant
+    // (e.g. the catalog filter dropdowns) for as long as the transform
+    // stays non-"none" — so drop it once the transition has settled.
+    window.setTimeout(() => el.classList.add("is-settled"), 750);
+  }
+
   if (!("IntersectionObserver" in window)) {
-    targets.forEach((el) => el.classList.add("is-visible"));
+    targets.forEach(reveal);
     return;
   }
 
@@ -34,7 +43,7 @@ function initScrollReveal() {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
+          reveal(entry.target);
           io.unobserve(entry.target);
         }
       });
@@ -46,7 +55,7 @@ function initScrollReveal() {
   // Safety net — never leave a section permanently invisible if the
   // observer is slow, misfires, or a screenshot/crawler skips scrolling.
   window.setTimeout(() => {
-    targets.forEach((el) => el.classList.add("is-visible"));
+    targets.forEach(reveal);
   }, 2000);
 }
 
@@ -363,18 +372,43 @@ function initCatalog() {
   });
 
   const dropdowns = document.querySelectorAll("[data-dropdown]");
+
+  function positionPanel(dd) {
+    const btn = dd.querySelector("[data-dropdown-btn]");
+    const panel = dd.querySelector(".filter-dropdown__panel");
+    const rect = btn.getBoundingClientRect();
+    const left = Math.min(rect.left, window.innerWidth - panel.offsetWidth - 16);
+    panel.style.top = `${rect.bottom + 8}px`;
+    panel.style.left = `${Math.max(16, left)}px`;
+  }
+
+  function closeAllDropdowns() {
+    dropdowns.forEach((dd) => dd.classList.remove("is-open"));
+  }
+
   dropdowns.forEach((dd) => {
     const btn = dd.querySelector("[data-dropdown-btn]");
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
       const isOpen = dd.classList.contains("is-open");
-      dropdowns.forEach((other) => other.classList.remove("is-open"));
-      if (!isOpen) dd.classList.add("is-open");
+      closeAllDropdowns();
+      if (!isOpen) {
+        dd.classList.add("is-open");
+        positionPanel(dd);
+      }
     });
   });
-  document.addEventListener("click", () => {
-    dropdowns.forEach((dd) => dd.classList.remove("is-open"));
+  // Clicking inside an open panel (e.g. a checkbox) must not close it —
+  // only a click truly outside every dropdown should.
+  document.addEventListener("click", (e) => {
+    if (e.target.closest("[data-dropdown]")) return;
+    closeAllDropdowns();
   });
+  // Panels are position:fixed relative to their button; scrolling or
+  // resizing the viewport would leave them stranded, so just close them.
+  window.addEventListener("scroll", closeAllDropdowns, { passive: true });
+  window.addEventListener("resize", closeAllDropdowns);
+  document.querySelector(".filter-bar")?.addEventListener("scroll", closeAllDropdowns, { passive: true });
 
   render();
 }
